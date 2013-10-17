@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<route xmlns="http://camel.apache.org/schema/spring">
+  <from uri="switchyard://CreditService"/>
+  <log message="CreditService - message received: ${body}"/>
+  <filter>
+		<xpath>count(//*[local-name() = 'income']) = 0</xpath>
+		<to uri="switchyard://IncomeFix"/>
+	</filter> 
+  <to uri="switchyard://FancyCredit"/>
+</route>
